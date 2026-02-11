@@ -5,15 +5,20 @@ import { ExternalLink, ImageOff } from "lucide-react";
 function ProjectCard({ project }) {
   const hasImage = Boolean(project.image);
 
-  return (
-    // ✅ Outer wrapper clips EVERYTHING inside (image included)
-    <div className="glass rounded-2xl overflow-hidden border border-white/10 bg-white/5 flex flex-col">
-      {/* ✅ Image area (always clipped) */}
-      <div className="w-full aspect-[16/9] bg-white/5 border-b border-white/10 overflow-hidden">
-        {h<img
-  src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
-  alt={project.title}
-/>
+return (
+  // ✅ Outer wrapper clips EVERYTHING inside (image included)
+  <div className="glass rounded-2xl overflow-hidden border border-white/10 bg-white/5 flex flex-col">
+    
+    {/* ✅ Image area (always clipped) */}
+    <div className="w-full aspect-[16/9] bg-white/5 border-b border-white/10 overflow-hidden">
+      <img
+        src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
+        alt={`${project.title} screenshot`}
+        loading="lazy"
+        className="w-full h-full object-cover object-center"
+      />
+    </div>
+
 
 
   alt={`${project.title} screenshot`}
