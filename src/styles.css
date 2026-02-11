@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+::selection { background: rgba(99, 102, 241, 0.35); }
+
+/* =========================================================
+   ✅ SINGLE-SCROLLBAR GUARANTEE (Windows-safe)
+   - html/body/root can NEVER scroll (outer scrollbar removed)
+   - #app-scroll is the ONLY place allowed to scroll
+   - all nested scroll containers are disabled + their bars hidden
+   ========================================================= */
+
+/* Outer containers never scroll */
+html, body, #root {
+  height: 100% !important;
+  margin: 0 !important;
+  background: #070A12 !important;
+  overflow: hidden !important;  /* kills browser scrollbar */
+}
+
+/* The ONE and ONLY scrollbar lives here */
+#app-scroll {
+  height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Prevent horizontal overflow artifacts that cause weird extra UI */
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* Disable nested scroll containers inside the app */
+#app-scroll * {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Hide any nested scrollbars if something still forces overflow */
+#app-scroll *::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+}
+#app-scroll * {
+  scrollbar-width: none !important;     /* Firefox */
+  -ms-overflow-style: none !important;  /* legacy */
+}
+
+/* Keep the ONE scrollbar visible for #app-scroll */
+#app-scroll::-webkit-scrollbar {
+  width: 12px;
+}
+#app-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 999px;
+  border: 3px solid rgba(7,10,18,1);
+}
+#app-scroll::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.06);
+}
+
+/* ---- Theme components ---- */
+@layer components {
+  .glass { @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-glow; }
+  .chip { @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition; }
+  .btn-primary { @apply btn bg-white text-black hover:bg-white/90; }
+  .btn-ghost { @apply btn bg-white/5 border border-white/10 text-white/90 hover:bg-white/10; }
+  .muted { @apply text-white/65; }
+  .section-title { @apply text-2xl sm:text-3xl font-semibold tracking-tight; }
+  .section-kicker { @apply text-xs uppercase tracking-[0.24em] text-white/55; }
+  .hr { @apply h-px w-full bg-white/10; }
+  .shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+    background-size: 200% 100%;
+    animation: shimmer 2.6s linear infinite;
+  }
+}
