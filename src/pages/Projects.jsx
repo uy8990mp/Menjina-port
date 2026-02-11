@@ -14,50 +14,71 @@ export default function Projects() {
       </FadeIn>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {profile.projects.map((project) => (
-          <Card key={project.title} className="overflow-hidden flex flex-col p-0">
-            
-            {/* Image Section */}
-            <div className="aspect-[16/9] w-full bg-white/5 border-b border-white/10 overflow-hidden">
-              <img
-                src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
-                alt={project.title}
-                loading="lazy"
-                className="h-full w-full object-cover object-center"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-            </div>
+        {profile.projects.map((project) => {
+          const imageSrc = `${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`;
 
-            {/* Content Section */}
-            <div className="p-6 flex flex-col gap-3 flex-1">
-              <div className="text-lg font-semibold text-white/90">
-                {project.title}
+          const isNestcom =
+            project.title.toLowerCase().includes("nestcom");
+
+          return (
+            <Card
+              key={project.title}
+              className="overflow-hidden flex flex-col p-0"
+            >
+              {/* Image Section */}
+              <div className="aspect-[16/9] w-full bg-white/5 border-b border-white/10 overflow-hidden flex items-center justify-center">
+                <img
+                  src={imageSrc}
+                  alt={project.title}
+                  loading="lazy"
+                  className={`h-full w-full ${
+                    isNestcom
+                      ? "object-contain p-6"
+                      : "object-cover object-center"
+                  }`}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
               </div>
 
-              <div className="text-white/70 text-sm leading-relaxed">
-                {project.description}
-              </div>
+              {/* Content Section */}
+              <div className="p-6 flex flex-col gap-3 flex-1">
+                <div className="text-lg font-semibold text-white/90">
+                  {project.title}
+                </div>
 
-              <BadgeRow items={project.tags} />
+                <div className="text-white/70 text-sm leading-relaxed">
+                  {project.description}
+                </div>
 
-              <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                {(project.links || []).map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target={link.href?.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
-                    className="btn-ghost"
-                  >
-                    {link.label} <ExternalLink size={16} />
-                  </a>
-                ))}
+                <BadgeRow items={project.tags} />
+
+                <div className="mt-auto pt-4 flex flex-wrap gap-2">
+                  {(project.links || []).map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target={
+                        link.href?.startsWith("http")
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        link.href?.startsWith("http")
+                          ? "noreferrer"
+                          : undefined
+                      }
+                      className="btn-ghost"
+                    >
+                      {link.label} <ExternalLink size={16} />
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
