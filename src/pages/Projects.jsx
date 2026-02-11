@@ -12,7 +12,8 @@ function ProjectCard({ project }) {
       <div className="w-full aspect-[16/9] bg-white/5 border-b border-white/10 overflow-hidden">
         {hasImage ? (
           <img
-  src={project.image}
+  src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
+
   alt={`${project.title} screenshot`}
   loading="lazy"
   className={
