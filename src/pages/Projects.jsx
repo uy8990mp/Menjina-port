@@ -10,15 +10,11 @@ function ProjectCard({ project }) {
     <div className="glass rounded-2xl overflow-hidden border border-white/10 bg-white/5 flex flex-col">
       {/* ✅ Image area (always clipped) */}
       <div className="w-full aspect-[16/9] bg-white/5 border-b border-white/10 overflow-hidden">
-        {hasImage ? (
-          <img
-   src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
-  alt={`${project.title} screenshot`}
-  loading="lazy"
-  className="h-full w-full object-cover"
-  onError={(e) => {
-    e.currentTarget.style.display = "none";
-  }}
+        {h<img
+  src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
+  alt={project.title}
+/>
+
 
   alt={`${project.title} screenshot`}
   loading="lazy"
