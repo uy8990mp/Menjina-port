@@ -12,7 +12,13 @@ function ProjectCard({ project }) {
       <div className="w-full aspect-[16/9] bg-white/5 border-b border-white/10 overflow-hidden">
         {hasImage ? (
           <img
-  src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
+   src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, "")}`}
+  alt={`${project.title} screenshot`}
+  loading="lazy"
+  className="h-full w-full object-cover"
+  onError={(e) => {
+    e.currentTarget.style.display = "none";
+  }}
 
   alt={`${project.title} screenshot`}
   loading="lazy"
